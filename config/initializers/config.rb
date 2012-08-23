@@ -7,11 +7,11 @@ config_file_exists = FileTest.exists?(EXTERNAL_CONFIG_FILE_PATH)
 case
 when config_file_exists
 # if it does exist, load it
-MyApp::Application.config.application = YAML.load_file(EXTERNAL_CONFIG_FILE_PATH)[::Rails.env]
+Followup::Application.config.application = YAML.load_file(EXTERNAL_CONFIG_FILE_PATH)[::Rails.env]
 #
 when !config_file_exists && ( ::Rails.env=='development' || ::Rails.env=='test' )
 # otherwise use some sensible defaults, but only for dev or test
-MyApp::Application.config.application = {
+Followup::Application.config.application = {
     #'a map' => 'of config values'
 }
 #
