@@ -1,8 +1,10 @@
 # this file is optional in the dev and test environments.
 # See initializers/config.rb for defaults for dev and test
 development:
-meetup.api.key: 64876890385457
+  meetup_api_key: 64876890385457
+  
 test:
-meetup.api.key: 64876890385457
+  meetup_api_key: 64876890385457
+
 production:
-meetup.api.key: 64876890385457
+  meetup_api_key: 64876890385457
