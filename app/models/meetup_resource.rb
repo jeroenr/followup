@@ -21,9 +21,9 @@ class MeetupResource < ActiveResource::Base
   # Meetup API Limits: http://www.meetup.com/meetup_api/docs/#limits
   API_MAX_RESULTS = 200
 
-  def self.inherited(klass)
+  def self.inherited(clazz)
     # e.g. MeetupGroup.element_name = 'group'
-    klass.send('element_name=', klass.name.sub(/^Meetup/,"").downcase)
+    clazz.send('element_name=', clazz.name.sub(/^Meetup/,"").downcase)
   end
 
 
@@ -61,7 +61,7 @@ class MeetupResource < ActiveResource::Base
 
   def self.find(scope, args = {})
     if args[:params]
-      args[:params].merge!({:key => @api_key || API_KEY })
+      args[:params].merge!({:key => @api_key || MEETUP_API_KEY })
     end
     super(scope, args)
   end
