@@ -8,4 +8,10 @@ class MeetupEvent < MeetupResourceWithGroup
     find_everything( :params => { :member_id => member_id } )
   end
 
+  def self.for_id(id, api_key = nil)
+    @api_key = api_key.blank? ? MEETUP_API_KEY : api_key
+
+    find_everything( :params => { :id => id } )
+  end
+
 end

@@ -12,4 +12,37 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require_tree .
+//= require websocket_rails/main
+
+var dispatcher = new WebSocketRails('localhost:3000/websocket');
+
+dispatcher.on_open = function(data) {
+    console.log('Connection has been established: ' + data);
+}
+
+dispatcher.on_close = function(data) {
+    console.log('Connection has been closed: ' + data);
+}
+
+$(function() {
+    $('#rsvp_yes').click(function(message) {
+        dispatcher.trigger('rsvp.yes');
+    });
+
+    $('#rsvp_no').click(function(message) {
+        dispatcher.trigger('rsvp.no');
+    });
+
+//    var channel = dispatcher.subscribe('rsvp');
+//    channel.bind('new', function(rsvp) {
+//      console.log('a new post about '+rsvp.attending+' arrived!');
+//    });
+
+    dispatcher.bind('new_rsvp', function(rsvp_count) {
+      console.log('New RSVP. Total is now: ' + rsvp_count);
+        $('#rsvp_count').html(rsvp_count)
+    });
+});
+

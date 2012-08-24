@@ -1,6 +1,7 @@
-<h1>FollowUpEvent#index</h1>
-<p>Find me in app/views/follow_up_event/index.html.erb</p>
+<h1><%= @event_group %> Follow Up Events</h1>
 
+<ul>
 <% @events.each do |event| %>
-  <%= event.name %>: <%= event.description %>
+  <li><%= link_to event.name, :action => :show, :id => event.id%></li>
 <% end %>
+</ul>
