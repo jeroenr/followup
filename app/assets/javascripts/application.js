@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require_tree .
 //= require websocket_rails/main
 
@@ -29,6 +30,11 @@ $(function() {
 
     $('#rsvp_no').click(function(message) {
         dispatcher.trigger('rsvp.no')
+    });
+
+    var channel = dispatcher.subscribe('rsvp');
+    channel.bind('new', function(rsvp) {
+      console.log('a new post about '+rsvp.attending+' arrived!');
     });
 });
 
