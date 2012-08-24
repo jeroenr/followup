@@ -40,9 +40,10 @@ $(function() {
 //      console.log('a new post about '+rsvp.attending+' arrived!');
 //    });
 
-    dispatcher.bind('new_rsvp', function(rsvp_count) {
-      console.log('New RSVP. Total is now: ' + rsvp_count);
-        $('#rsvp_count').html(rsvp_count)
+    dispatcher.bind('new_rsvp', function(rsvp_update) {
+      console.log('New RSVP. Total is now: ' + rsvp_update);
+        $('#rsvp_yes_count').html(rsvp_update.rsvp_yes);
+        $('#rsvp_no_count').html(rsvp_update.rsvp_no);
     });
 });
 
