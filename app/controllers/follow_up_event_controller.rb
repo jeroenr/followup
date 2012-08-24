@@ -1,10 +1,11 @@
 class FollowUpEventController < ApplicationController
   
   def index
-    @events = MeetupEvent.for_group_name('appsterdam')
+    @event_group = 'Appsterdam'
+    @events = MeetupEvent.for_group_name(@event_group.downcase)
   end
 
   def show
-    @event = MeetupEvent.for_id(params[:id])
+    @event = MeetupEvent.for_id(params[:id])[0]
   end
 end
