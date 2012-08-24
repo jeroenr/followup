@@ -57,6 +57,9 @@
     </div>
 
     <div class="container">
+      <% if Rails.env.development? %>
+        <a href="#" onclick="dispatcher.trigger('websocket_rails.reload!');">reload controller</a>
+      <% end %>
       <div class="content">
         <div class="row">
            <div class="span9">
