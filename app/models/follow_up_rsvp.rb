@@ -1,4 +1,5 @@
-class FollowUpRsvp < ActiveModel
+class FollowUpRsvp
+  include ActiveModel::Serialization
   attr_accessor :attending
 
   def initialize(attending)

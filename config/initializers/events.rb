@@ -12,7 +12,8 @@ WebsocketRails::EventMap.describe do
   #   end
   # The above will handle an event triggered on the client like `product.new`.
 
-  #namespace :rsvp do
-  #  subscribe :new, :to => FollowUpRsvpController, :with_method => :create
-  #end
+  namespace :rsvp do
+    subscribe :yes, :to => FollowUpRsvpController, :with_method => :rsvp_yes
+    subscribe :no, :to => FollowUpRsvpController, :with_method => :rsvp_no
+  end
 end

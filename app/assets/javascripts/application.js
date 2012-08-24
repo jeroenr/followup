@@ -15,3 +15,20 @@
 //= require_tree .
 //= require websocket_rails/main
 
+var dispatcher = new WebSocketRails('localhost:3000/websocket');
+
+dispatcher.on_open = function(data) {
+    console.log('Connection has been established: ' + data);
+}
+
+
+$(function() {
+    $('#rsvp_yes').click(function(message) {
+        dispatcher.trigger('rsvp.yes')
+    });
+
+    $('#rsvp_no').click(function(message) {
+        dispatcher.trigger('rsvp.no')
+    });
+});
+
