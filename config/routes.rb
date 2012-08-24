@@ -1,5 +1,5 @@
 Followup::Application.routes.draw do
-  get "follow_up_event/index"
+  match 'events' => 'follow_up_event#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
