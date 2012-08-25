@@ -14,4 +14,10 @@ class MeetupEvent < MeetupResourceWithGroup
     find_everything( :params => { :event_id => id } )
   end
 
+  def event_reference_id
+    # taken from the event_url attribute
+    #"event_url": "http://meetup.appsterdam.rs/events/77148392/",
+    event_url.match(/\d+$/)[0]
+  end
+
 end
