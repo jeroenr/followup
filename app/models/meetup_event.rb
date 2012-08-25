@@ -11,7 +11,7 @@ class MeetupEvent < MeetupResourceWithGroup
   def self.for_id(id, api_key = nil)
     @api_key = api_key.blank? ? MEETUP_API_KEY : api_key
 
-    find_everything( :params => { :id => id } )
+    find_everything( :params => { :event_id => id } )
   end
 
 end

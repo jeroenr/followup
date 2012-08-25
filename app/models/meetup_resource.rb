@@ -4,7 +4,7 @@
 
 class MeetupResource < ActiveResource::Base
 
-  self.site = "http://api.meetup.com/"
+  self.site = "http://api.meetup.com/2/"
 
   attr_accessor :api_key
 
