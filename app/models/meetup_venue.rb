@@ -1,5 +1,5 @@
 class MeetupVenue < MeetupResource
-  extend MeetupResourceWithGroup
+  extend MeetupQueryable::ByGroup
 
   def self.for_event(event_id, api_key = nil)
     @api_key = api_key

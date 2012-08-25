@@ -1,5 +1,5 @@
 class MeetupMember < MeetupResource
-  extend MeetupResourceWithGroup
+  extend MeetupQueryable::ByGroup
 
   # Examples:
   #  member = MeetupMember.for_member('437658')

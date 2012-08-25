@@ -1,5 +1,5 @@
 class MeetupEvent < MeetupResource
-  extend MeetupResourceWithGroup
+  extend MeetupQueryable::ByGroup
   # Example:
   #  events = MeetupGroup.for_member('437658')
   def self.for_member(member_id, api_key = nil)
