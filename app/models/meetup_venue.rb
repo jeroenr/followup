@@ -8,4 +8,8 @@ class MeetupVenue < MeetupResource
     find_everything( :params => { :venue_id => id } )
   end
 
+  def address
+    address_1
+  end
+
 end

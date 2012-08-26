@@ -34,4 +34,12 @@ module MeetupQueryable
     end
 
   end
+  module ByTopic
+    def self.for_topic(topic, api_key = nil)
+      @api_key = api_key
+
+      find(:first, :params => { :topic => topic } )
+    end
+
+  end
 end
