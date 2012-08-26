@@ -1,12 +1,5 @@
 class MeetupRsvp < MeetupResource
-
-  # Example:
-  #  rsvps = MeetupRsvp.for_event('437658')
-  def self.for_event(event_id, api_key = nil)
-    @api_key = api_key
-
-    find_everything(:params => { :event_id => event_id } )  
-  end
+  extend MeetupQueryable::ByEvent
 
   def member_id
     # taken from the link attribute

@@ -1,12 +1,6 @@
 class MeetupEvent < MeetupResource
   extend MeetupQueryable::ByGroup
-  # Example:
-  #  events = MeetupGroup.for_member('437658')
-  def self.for_member(member_id, api_key = nil)
-    @api_key = api_key
-
-    find_everything( :params => { :member_id => member_id } )
-  end
+  extend MeetupQueryable::ByMember
 
   def self.for_id(id, api_key = nil)
     @api_key = api_key
