@@ -1,17 +1,23 @@
-class MeetupEvent < MeetupResourceWithGroup
-
-  # Example:
-  #  events = MeetupGroup.for_member('437658')
-  def self.for_member(member_id, api_key = nil)
-    @api_key = api_key.blank? ? MEETUP_API_KEY : api_key
-
-    find_everything( :params => { :member_id => member_id } )
-  end
+class MeetupEvent < MeetupResource
+  extend MeetupQueryable::ByGroup
+  extend MeetupQueryable::ByMember
 
   def self.for_id(id, api_key = nil)
-    @api_key = api_key.blank? ? MEETUP_API_KEY : api_key
+    @api_key = api_key
 
-    find_everything( :params => { :id => id } )
+    find_everything( :params => { :event_id => id } )
+  end
+
+  def self.for_venue(venue_id, api_key = nil)
+    @api_key = api_key
+
+    find_everything( :params => { :venue_id => venue_id } )
+  end
+
+  def event_reference_id
+    # taken from the event_url attribute
+    #"event_url": "http://meetup.appsterdam.rs/events/77148392/",
+    event_url.match(/\d+/)
   end
 
 end

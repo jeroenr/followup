@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+if RUBY_VERSION =~ /1.9/
+  Encoding.default_external = Encoding::UTF_8
+  Encoding.default_internal = Encoding::UTF_8
+end
+
 gem 'rails', '3.2.3'
 
 # Bundle edge Rails instead:

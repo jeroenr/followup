@@ -4,7 +4,7 @@
 
 class MeetupResource < ActiveResource::Base
 
-  self.site = "http://api.meetup.com/"
+  self.site = "http://api.meetup.com/2/"
 
   attr_accessor :api_key
 
@@ -37,9 +37,8 @@ class MeetupResource < ActiveResource::Base
     end
 
     def decode(xml)
-      # ISO-8859-1 works for both OS X and Solaris
       from_xml_data(
-        (Hash.from_xml(xml.sub('latin_1','ISO-8859-1'))["results"]["items"] || {}).values.first)
+        (Hash.from_xml(xml)["results"]["items"] || {}).values.first)
     end
 
     private
