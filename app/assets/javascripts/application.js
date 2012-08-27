@@ -24,6 +24,7 @@ dispatcher.on_open = function(data) {
 
 dispatcher.on_close = function(data) {
     console.log('Connection has been closed: ' + data);
+    window.dispatcher = new WebSocketRails('localhost:3000/websocket');
 }
 
 $(function() {
