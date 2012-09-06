@@ -17,7 +17,7 @@ class MeetupEvent < MeetupResource
   def event_reference_id
     # taken from the event_url attribute
     #"event_url": "http://meetup.appsterdam.rs/events/77148392/",
-    event_url.match(/\d+/)
+    event_url.match(/[0-9a-z]*\/$/)[0].chop
   end
 
 end
