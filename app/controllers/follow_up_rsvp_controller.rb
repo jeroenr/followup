@@ -23,8 +23,6 @@ class FollowUpRsvpController < WebsocketRails::BaseController
         :rsvp_yes => @rsvp_yes_count,
         :rsvp_no => @rsvp_no_count
     }
-    #send_message :create_successful, @rsvp_count, :namespace => :rsvp
-    broadcast_message :new_rsvp, rsvp_update
-    #WebsocketRails[:rsvp].trigger 'new', @rsvp_count
+    WebsocketRails[:rsvp].trigger 'new', rsvp_update
   end
 end

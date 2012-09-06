@@ -20,13 +20,10 @@ $ ->
     $('#rsvp_no').bind 'click', (message) =>
         websocket_dispatcher.trigger 'rsvp.new',false
 
-#    channel = websocket_dispatcher.subscribe 'rsvp'
-#    channel.bind 'new', (rsvp) =>
-#      console.log "new rsvp #{rsvp}"
+    channel = websocket_dispatcher.subscribe 'rsvp'
+    channel.bind 'new', (rsvp_update) =>
+      $('#rsvp_yes_count').html rsvp_update.rsvp_yes
+      $('#rsvp_no_count').html rsvp_update.rsvp_no
 
-    websocket_dispatcher.bind 'new_rsvp', (rsvp_update) =>
-        console.log "New RSVP. Total is now: #{rsvp_update}"
-        $('#rsvp_yes_count').html rsvp_update.rsvp_yes
-        $('#rsvp_no_count').html rsvp_update.rsvp_no
 
 
