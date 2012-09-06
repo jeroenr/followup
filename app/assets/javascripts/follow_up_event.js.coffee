@@ -25,9 +25,9 @@ $ ->
         websocket_dispatcher.trigger 'rsvp.new',rsvp
 
     channel = websocket_dispatcher.subscribe 'rsvp'
-    channel.bind 'new', (rsvp_update) =>
-      $('#rsvp_yes_count').html rsvp_update.rsvp_yes
-      $('#rsvp_no_count').html rsvp_update.rsvp_no
+    channel.bind 'new', (rsvp) =>
+      $('#rsvp_yes_count').html rsvp.yes
+      $('#rsvp_no_count').html rsvp.no
 
 
 
