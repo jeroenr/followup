@@ -15,10 +15,14 @@ $ ->
         window.websocket_dispatcher = new WebSocketRails(websocket_endpoint)
 
     $('#rsvp_yes').bind 'click', (message) =>
-        websocket_dispatcher.trigger 'rsvp.new',true
+        rsvp =
+          attending: true
+        websocket_dispatcher.trigger 'rsvp.new',rsvp
 
     $('#rsvp_no').bind 'click', (message) =>
-        websocket_dispatcher.trigger 'rsvp.new',false
+        rsvp =
+          attending: false
+        websocket_dispatcher.trigger 'rsvp.new',rsvp
 
     channel = websocket_dispatcher.subscribe 'rsvp'
     channel.bind 'new', (rsvp_update) =>

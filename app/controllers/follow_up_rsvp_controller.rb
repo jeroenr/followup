@@ -6,7 +6,7 @@ class FollowUpRsvpController < WebsocketRails::BaseController
   end
 
   def rsvp
-    rsvp = FollowUpRsvp.new message
+    rsvp = FollowUpRsvp.new message[:attending]
     register_rsvp(rsvp)
   end
   
