@@ -5,13 +5,8 @@ class FollowUpRsvpController < WebsocketRails::BaseController
     @rsvp_no_count = 0
   end
 
-  def rsvp_yes
-    rsvp = FollowUpRsvp.new true
-    register_rsvp(rsvp)
-  end
-
-  def rsvp_no
-    rsvp = FollowUpRsvp.new false
+  def rsvp
+    rsvp = FollowUpRsvp.new message
     register_rsvp(rsvp)
   end
   
