@@ -1,9 +1,10 @@
 class FollowUpRsvp
   include ActiveModel::Serialization
-  attr_accessor :attending
+  attr_accessor :attending, :event
 
-  def initialize(attending)
+  def initialize(attending, event_id)
     @attending = attending
+    @event = event_id
   end
 
   def will_attend?

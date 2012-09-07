@@ -10,6 +10,7 @@ $ ->
     websocket_dispatcher = new WebSocketRails(websocket_endpoint)
 
     sender = false
+    event_id = $('#event_id').val()
     websocket_dispatcher.on_open = (data) ->
         console.log "Connection has been established: #{data}"
 
@@ -21,15 +22,17 @@ $ ->
         sender = true
         rsvp =
           attending: true
+          event: event_id
         websocket_dispatcher.trigger 'rsvp.new',rsvp
 
     $('#rsvp_no').bind 'click', (message) =>
         sender = true
         rsvp =
           attending: false
+          event: event_id
         websocket_dispatcher.trigger 'rsvp.new',rsvp
 
-    channel = websocket_dispatcher.subscribe 'rsvp'
+    channel = websocket_dispatcher.subscribe "rsvp#{event_id}"
     channel.bind 'new', (rsvp) =>
       noty({text: 'New RSVP just came in!', timeout: 1000, type: 'success'}) unless sender
       sender = false

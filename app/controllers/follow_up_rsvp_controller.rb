@@ -6,7 +6,7 @@ class FollowUpRsvpController < WebsocketRails::BaseController
   end
 
   def rsvp
-    rsvp = FollowUpRsvp.new message[:attending]
+    rsvp = FollowUpRsvp.new message[:attending], message[:event]
     register_rsvp(rsvp)
   end
   
@@ -23,6 +23,6 @@ class FollowUpRsvpController < WebsocketRails::BaseController
         :yes => @rsvp_yes_count,
         :no => @rsvp_no_count
     }
-    WebsocketRails[:rsvp].trigger 'new', rsvp_update
+    WebsocketRails["rsvp#{rsvp.event}"].trigger 'new', rsvp_update
   end
 end
