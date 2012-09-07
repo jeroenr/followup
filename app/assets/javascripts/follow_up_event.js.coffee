@@ -4,6 +4,8 @@
 
 websocket_endpoint = 'localhost:3000/websocket'
 
+
+
 $ ->
     websocket_dispatcher = new WebSocketRails(websocket_endpoint)
 
@@ -26,6 +28,7 @@ $ ->
 
     channel = websocket_dispatcher.subscribe 'rsvp'
     channel.bind 'new', (rsvp) =>
+      noty({text: 'New RSVP just came in!', timeout: 1000, type: 'success'})
       $('#rsvp_yes_count').html rsvp.yes
       $('#rsvp_no_count').html rsvp.no
 
