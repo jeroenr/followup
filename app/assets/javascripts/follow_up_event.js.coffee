@@ -4,9 +4,12 @@
 
 websocket_endpoint = 'localhost:3000/websocket'
 
+
+
 $ ->
     websocket_dispatcher = new WebSocketRails(websocket_endpoint)
 
+    sender = false
     websocket_dispatcher.on_open = (data) ->
         console.log "Connection has been established: #{data}"
 
@@ -15,18 +18,23 @@ $ ->
         window.websocket_dispatcher = new WebSocketRails(websocket_endpoint)
 
     $('#rsvp_yes').bind 'click', (message) =>
-        websocket_dispatcher.trigger 'rsvp.yes'
+        sender = true
+        rsvp =
+          attending: true
+        websocket_dispatcher.trigger 'rsvp.new',rsvp
 
     $('#rsvp_no').bind 'click', (message) =>
-        websocket_dispatcher.trigger 'rsvp.no'
+        sender = true
+        rsvp =
+          attending: false
+        websocket_dispatcher.trigger 'rsvp.new',rsvp
 
-#    channel = websocket_dispatcher.subscribe 'rsvp'
-#    channel.bind 'new', (rsvp) =>
-#      console.log "new rsvp #{rsvp}"
+    channel = websocket_dispatcher.subscribe 'rsvp'
+    channel.bind 'new', (rsvp) =>
+      noty({text: 'New RSVP just came in!', timeout: 1000, type: 'success'}) unless sender
+      sender = false
+      $('#rsvp_yes_count').html rsvp.yes
+      $('#rsvp_no_count').html rsvp.no
 
-    websocket_dispatcher.bind 'new_rsvp', (rsvp_update) =>
-        console.log "New RSVP. Total is now: #{rsvp_update}"
-        $('#rsvp_yes_count').html rsvp_update.rsvp_yes
-        $('#rsvp_no_count').html rsvp_update.rsvp_no
 
 
