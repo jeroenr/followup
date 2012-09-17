@@ -8,8 +8,6 @@ class MeetupStreamReader
 
   def self.runner
     url = "http://stream.meetup.com/2/rsvps"
-    rsvp_yes_count = 0
-    rsvp_no_count = 0
 
     EventMachine.run do
       http = EventMachine::HttpRequest.new(url).get
@@ -20,8 +18,10 @@ class MeetupStreamReader
         buffer += chunk
         while line = buffer.slice!(/.+\r?\n/)
           hash = JSON.parse(line)
-          attending = hash['response'] == 'yes'
-          ws.send '["rsvp.new", {"data": {"attending" : '+"#{attending}"+'}}]'
+          new_rsvp_event = WebsocketRails::Event.new "rsvp.new", :data => {
+              :attending => hash['response'] == 'yes'
+          }
+          ws.send new_rsvp_event.serialize
         end
       end
 
