@@ -1,4 +1,6 @@
 require 'eventmachine'
+require 'faye/websocket'
+require 'websocket_rails/event'
 require 'json'
 require 'date'
 
@@ -11,6 +13,7 @@ class MeetupStreamReader
 
     EventMachine.run do
       http = EventMachine::HttpRequest.new(url).get
+      ws = Faye::WebSocket::Client.new('ws://localhost:3000/websocket')
 
       buffer = ""
       http.stream do |chunk|
@@ -18,17 +21,19 @@ class MeetupStreamReader
         while line = buffer.slice!(/.+\r?\n/)
           hash = JSON.parse(line)
           #puts FollowUpRsvp.new(hash['response'] == 'yes')
-          if hash['response'] == 'yes'
-            rsvp_yes_count += 1
-          else
-            rsvp_no_count += 1
-          end
-          rsvp_update = {
-            :yes => rsvp_yes_count,
-            :no => rsvp_no_count
-          }
-          puts "New rsvp update #{rsvp_update}"
-          WebsocketRails[:rsvp].trigger 'new', rsvp_update
+          #if hash['response'] == 'yes'
+          #  rsvp_yes_count += 1
+          #else
+          #  rsvp_no_count += 1
+          #end
+          #rsvp_update = {
+          #  :yes => rsvp_yes_count,
+          #  :no => rsvp_no_count
+          #}
+          #puts "New rsvp update #{rsvp_update}"
+          #WebsocketRails[:rsvp].trigger 'new', rsvp_update
+          #ws.send WebsocketRails::Event.new "rsvp"
+          ws.send '["rsvp.new",{"data":{"channel":"rsvp", "attending":"true"}}]'
           #broadcast_message :new_rsvp, rsvp_update
         end
       end
