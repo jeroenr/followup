@@ -35,9 +35,6 @@ $ ->
       sender = false
       $('#rsvp_yes_count').html rsvp.yes
       $('#rsvp_no_count').html rsvp.no
-#
-#    websocket_dispatcher.bind 'new_rsvp', (rsvp_update) =>
-#        console.log "New RSVP. Total is now: #{rsvp_update}"
-#        noty({text: 'New RSVP just came in!', timeout: 1000, type: 'success'})
+
 
 
