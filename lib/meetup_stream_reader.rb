@@ -15,7 +15,7 @@ class MeetupStreamReader
 
       buffer = ""
       http.stream do |chunk|
-        buffer += chunk
+        buffer << chunk
         while line = buffer.slice!(/.+\r?\n/)
           hash = JSON.parse(line)
           new_rsvp_event = WebsocketRails::Event.new "rsvp.new", :data => {
