@@ -1,4 +1,6 @@
 Followup::Application.routes.draw do
+  get "exception/not_found"
+
   match 'events' => 'follow_up_event#index'
 
   # The priority is based upon order of creation:
@@ -6,6 +8,8 @@ Followup::Application.routes.draw do
 
   # Sample of regular route:
   match 'events/:id' => 'follow_up_event#show'
+
+  match '/404', :to => "exception#not_found"
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
