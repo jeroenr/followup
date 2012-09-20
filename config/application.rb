@@ -15,7 +15,9 @@ module Followup
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    config.exceptions_app = self.routes
+    config.exceptions_app = config.exceptions_app = lambda do |env|
+    	ExceptionController.action(:show_error).call(env)
+    end
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
