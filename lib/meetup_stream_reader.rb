@@ -25,15 +25,16 @@ class MeetupStreamReader
       lastminute_generator.start
 
       meetup_ws_endpoint.onmessage = lambda do |event|
-        puts event.data
         hash = JSON.parse(event.data)
         venue = hash['venue']
         if venue
           new_rsvp_event = WebsocketRails::Event.new "rsvp.new", :data => {
-              :name => hash['member']['member_name'],
+              :user_id => hash['member']['member_id'],
+              :user_name => hash['member']['member_name'],
               :attending => hash['response'] == 'yes',
               :lat => venue['lat'],
-              :lng => venue['lon']
+              :lng => venue['lon'],
+              :image_url => hash['member']['photo']
           }
           rsvp_event_buffer << new_rsvp_event
           rsvp_queue << new_rsvp_event

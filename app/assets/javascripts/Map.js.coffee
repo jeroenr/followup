@@ -25,6 +25,7 @@ class window.Map
               <span class="title">
                   <span>#{rsvp.user_name} responded #{rsvp.attending}!</span>
               </span>
+              <span class="image" style="background-image:url('#{rsvp.image_url}');"></span>
           </a>
     """
     infowindow.setContent(html)
