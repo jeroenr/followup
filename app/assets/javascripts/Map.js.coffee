@@ -25,6 +25,7 @@ class window.Map
               <span class="title">
                   <span>#{rsvp.attend_msg}</span>
               </span>
+              <span>#{rsvp.user_name}</span>
               <span class="image" style="background:url('#{rsvp.image_url}') no-repeat;"></span>
           </a>
     """

@@ -9,7 +9,7 @@ class FollowUpRsvp
     @lat = lat
     @lng = lng
     @image_url = image_url
-    @attend_msg = attending ? "#{user_name} will be there!" : "#{user_name} won't be there"
+    @attend_msg = attending ? "Count me in!" : "Can't make it"
   end
 
   def will_attend?
