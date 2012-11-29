@@ -30,6 +30,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'json'
+
 gem 'jquery-rails'
 
 gem 'websocket-rails'

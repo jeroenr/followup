@@ -140,6 +140,7 @@ DEPENDENCIES
   em-http-request
   eventmachine
   jquery-rails
+  json
   rails (= 3.2.3)
   sass-rails (~> 3.2.3)
   sqlite3
