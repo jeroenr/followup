@@ -1,6 +1,8 @@
 require 'eventmachine'
 require 'faye/websocket'
 require 'websocket_rails/event'
+require 'synchronized_ring_buffer'
+require 'timer'
 require 'json'
 require 'date'
 
@@ -10,9 +12,6 @@ class MeetupStreamReader
 
     rsvp_event_buffer = SynchronizedRingBuffer.new(50)
     rsvp_queue = Queue.new
-
-    count = 0
-
 
     EventMachine.run do
       meetup_ws_endpoint = Faye::WebSocket::Client.new('ws://stream.meetup.com/2/rsvps')
@@ -26,16 +25,19 @@ class MeetupStreamReader
       lastminute_generator.start
 
       meetup_ws_endpoint.onmessage = lambda do |event|
-        hash = JSON.parse(event)
-        new_rsvp_event = WebsocketRails::Event.new "rsvp.new", :data => {
+        puts event.data
+        hash = JSON.parse(event.data)
+        venue = hash['venue']
+        if venue
+          new_rsvp_event = WebsocketRails::Event.new "rsvp.new", :data => {
               :name => hash['member']['member_name'],
               :attending => hash['response'] == 'yes',
-              :lat => hash['venue']['lat'],
-              :lng => hash['venue']['lon']
+              :lat => venue['lat'],
+              :lng => venue['lon']
           }
-        rsvp_event_buffer << new_rsvp_event
-        rsvp_queue << new_rsvp_event
-        count += 1
+          rsvp_event_buffer << new_rsvp_event
+          rsvp_queue << new_rsvp_event
+        end
       end
 
       meetup_ws_endpoint.onerror = lambda do |event|

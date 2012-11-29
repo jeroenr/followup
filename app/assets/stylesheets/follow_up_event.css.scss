@@ -1,3 +1,66 @@
 // Place all the styles related to the follow_up_event controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body, html { margin: 0; height: 100%; }
+
+#div-wrapper { position: relative; width: 100%; height: 100%; }
+
+#div-content { position: absolute; z-index: 9; width: 100%; height: 100%; background: transparent; box-shadow: inset 0 0 25px 5px #000; }
+
+#map_canvas { z-index: 1; margin: 0; width: 100%; height: 100%; border: none; }
+
+a.span4 {
+    color: #222;
+    width: 100%;
+    height: 300px;
+    display: block;
+    position: relative;
+    text-decoration: none;
+    overflow: hidden;
+
+    .title {
+        font-size: 18px;
+        width: 350px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        font-weight: bold;
+    }
+
+    .image {
+        top: 35px;
+        position: absolute;
+        width: 100%;
+        height: 90%;
+        background-size:400px 300px;
+    }
+
+    .offer {
+        position: absolute;
+        top: 75px;
+        right: 0px;
+        width: 95px;
+        padding: 2px 7px;
+        background: #222;
+        color: white;
+        text-align: center;
+
+        .price {
+            font-family: Arial,sans;
+            font-weight: bold;
+            font-size: 14px;
+            padding-top: 5px;
+            line-height: 25.2px;
+            height: 25.2px;
+
+            span {
+                font-size: 25.2px;
+                height: 25.2px;
+                display: inline;
+            }
+        }
+    }
+}
+
