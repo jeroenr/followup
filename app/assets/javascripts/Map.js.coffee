@@ -23,7 +23,7 @@ class window.Map
     html = """
     <a href="#" class="span4">
               <span class="title">
-                  <span>#{rsvp.user_name} responded #{rsvp.attending}!</span>
+                  <span>#{rsvp.attend_msg}</span>
               </span>
               <span class="image" style="background:url('#{rsvp.image_url}') no-repeat;"></span>
           </a>
